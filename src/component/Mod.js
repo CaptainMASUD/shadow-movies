@@ -5,12 +5,8 @@ import PropTypes from "prop-types";
 import { NavLink } from 'react-router-dom';
 
 
-export default function Mod() {
+export default function Mod(props) {
   
-
-
-
-
 
   const navLinkStyle = {
     color: 'white',
@@ -21,7 +17,7 @@ export default function Mod() {
       <nav className="navbar  navbar-expand-lg  navbar-dark bg-dark">
         <div className="container-fluid">
           <h4 className="navbar-brand" to="/">
-            <span className='head'></span>
+            {props.title}<span className='head'>{props.title2}</span>
           </h4>
           <button
             className="navbar-toggler"
