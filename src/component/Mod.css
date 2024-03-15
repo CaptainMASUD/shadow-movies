@@ -224,7 +224,7 @@ body {
 @media screen and (min-width: 992px) and (max-width: 1450px) {
     .con1 {
         position: relative;
-        width: 125vw;
+        width: 100vw;
         /* height: ; */
         overflow: hidden;
         display: flex;
