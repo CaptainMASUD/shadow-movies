@@ -8,6 +8,7 @@ import Home from './component/Home/Home';
 import Login from './component/Login';
 import About from './component/About';
 import Request from './component/Request';
+import Seachpath from './component/Seachpath';
 
 const router = createBrowserRouter([
   {
@@ -25,9 +26,14 @@ const router = createBrowserRouter([
       {
         path : "request",
         element : <Request/>
-      },{
+      },
+      {
         path : "about",
         element : <About/>
+      },
+      {
+        path : "searchfound",
+        element : <Seachpath/>
       }
     ]
   }

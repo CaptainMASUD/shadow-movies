@@ -1,11 +1,48 @@
-// Mod.js
-
+import React, { useState, useEffect } from 'react';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import "./Mod.css";
 import PropTypes from "prop-types";
-import { NavLink } from 'react-router-dom';
+import Cards from './Card';
 
 
 export default function Mod(props) {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [cardData, setCardData] = useState([]);
+  const [filteredCards, setFilteredCards] = useState([]);
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+
+  const hanglehomeclicek = ()=>{
+    navigate('/')
+  }
+
+  useEffect(() => {
+    // Fetch data from JSON file
+    fetch('/cardData.json')
+      .then(response => response.json())
+      .then(data => setCardData(data))
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
+
+  const handleSearch = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+  
+    // If search term is empty, do not proceed
+    if (!searchTerm.trim()) {
+      // Optionally, you can display a message to the user indicating that the search term is empty
+      return;
+    }
+  
+    // Filter the cards based on the search term
+    const filtered = cardData.filter(card => card.title.toLowerCase().includes(searchTerm.toLowerCase()));
+    setFilteredCards(filtered);
+  
+    // Navigate to the searchfound path only if there are matching cards
+    if (filtered.length > 0) {
+      navigate('/searchfound');
+    }
+  };
   
 
   const navLinkStyle = {
@@ -33,67 +70,39 @@ export default function Mod(props) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <NavLink
-                  to=""
-                  className="nav-link"
-                  isActive={(match, location) => {
-                    if (!match) return false;
-                    return true;
-                  }}
-                  style={({ isActive }) => (isActive ? { color: '#D24545' } : navLinkStyle)}
-                  aria-current="page"
-                >
+                <NavLink to="/" className="nav-link" style={navLinkStyle} activeClassName="active">
                   Home
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink
-                  to="request"
-                  className="nav-link"
-                  isActive={(match, location) => {
-                    // Add your logic to determine if the NavLink is active
-                  }}
-                  style={({ isActive }) => (isActive ? { color: '#D24545' } : navLinkStyle)}
-                >
+                <NavLink to="/request" className="nav-link" style={navLinkStyle} activeClassName="active">
                   Request
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink
-                  to="about"
-                  className="nav-link"
-                  isActive={(match, location) => {
-                    // Add your logic to determine if the NavLink is active
-                  }}
-                  style={({ isActive }) => (isActive ? { color: '#D24545' } : navLinkStyle)}
-                >
+                <NavLink to="/about" className="nav-link" style={navLinkStyle} activeClassName="active">
                   About
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink
-                  to="login/singup"
-                  className="nav-link"
-                  isActive={(match, location) => {
-                    // Add your logic to determine if the NavLink is active
-                  }}
-                  style={({ isActive }) => (isActive ? { color: '#D24545' } : navLinkStyle)}
-                >
+                <NavLink to="/login/signup" className="nav-link" style={navLinkStyle} activeClassName="active">
                   Log in <i className="user fa-regular fa-user"></i>
                 </NavLink>
               </li>
             </ul>
-            <form className="d-flex" role="search">
+            <form className="d-flex" role="search" onSubmit={handleSearch}>
               <input
                 className="form-control me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
               />
               <button
                 className="btn btn-outline-success"
-                type="submit"
-                // Call handleSearch function on click
+                type="button"
+                onClick={handleSearch}
               >
                 Search
               </button>
@@ -102,6 +111,14 @@ export default function Mod(props) {
         </div>
       </nav>
       <br />
+      {/* Conditionally render the Cards component or a message */}
+      {location.pathname === '/searchfound' ? (
+        filteredCards.length > 0 ? (
+          <Cards cardData={filteredCards} />
+        ) : (
+          <div className="message" style={{color:"#D24545",fontSize:"1.5rem",textAlign:"center",padding:"5px",backgroundColor:"white"}}>No match found go  <button onClick={hanglehomeclicek} style={{border:"none",background:"none",color:"red",textDecoration:"underline"}}>home</button> </div>
+        )
+      ) : null}
     </div>
   );
 }
