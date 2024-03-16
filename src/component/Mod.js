@@ -13,8 +13,8 @@ export default function Mod(props) {
   const location = useLocation();
   
 
-  const hanglehomeclicek = ()=>{
-    navigate('/')
+  const handleHomeClick = () => {
+    navigate('/');
   }
 
   useEffect(() => {
@@ -43,10 +43,11 @@ export default function Mod(props) {
       navigate('/searchfound');
     }
   };
-  
 
-  const navLinkStyle = {
-    color: 'white',
+  const getNavLinkStyle = (route) => {
+    return {
+      color: location.pathname === route ? '#D24545' : 'white',
+    };
   };
 
   return (
@@ -70,22 +71,22 @@ export default function Mod(props) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <NavLink to="/" className="nav-link" style={navLinkStyle} activeClassName="active">
+                <NavLink exact to="/" className="nav-link" activeClassName="active" style={getNavLinkStyle('/')}>
                   Home
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/request" className="nav-link" style={navLinkStyle} activeClassName="active">
+                <NavLink exact to="/request" className="nav-link" activeClassName="active" style={getNavLinkStyle('/request')}>
                   Request
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/about" className="nav-link" style={navLinkStyle} activeClassName="active">
+                <NavLink exact to="/about" className="nav-link" activeClassName="active" style={getNavLinkStyle('/about')}>
                   About
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="login/singup" className="nav-link" style={navLinkStyle} activeClassName="active">
+                <NavLink exact to="/login/singup" className="nav-link" activeClassName="active" style={getNavLinkStyle('/login/singup')}>
                   Log in <i className="user fa-regular fa-user"></i>
                 </NavLink>
               </li>
@@ -112,13 +113,12 @@ export default function Mod(props) {
       </nav>
       <br />
       {/* Conditionally render the Cards component or a message */}
-      {location.pathname === '/searchfound' ? (
-        filteredCards.length > 0 ? (
-          <Cards cardData={filteredCards} />
-        ) : (
-          <div className="message" style={{color:"#D24545",fontSize:"1.5rem",textAlign:"center",padding:"5px",backgroundColor:"white"}}>No match found go  <button onClick={hanglehomeclicek} style={{border:"none",background:"none",color:"red",textDecoration:"underline"}}>home</button> </div>
-        )
-      ) : null}
+      {location.pathname === '/searchfound' && filteredCards.length > 0 && (
+        <Cards cardData={filteredCards} />
+      )}
+      {location.pathname === '/searchfound' && filteredCards.length === 0 && (
+        <div className="message" style={{color:"#D24545",fontSize:"1.5rem",textAlign:"center",padding:"5px",backgroundColor:"white"}}>No match found go  <button onClick={handleHomeClick} style={{border:"none",background:"none",color:"red",textDecoration:"underline"}}>home</button> </div>
+      )}
     </div>
   );
 }
