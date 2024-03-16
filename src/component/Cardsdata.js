@@ -74,11 +74,11 @@ const Cardsdata = () => {
     },
   
     {
-      title: 'Aquaman and the Lost Kingdom',
+      title: 'Aquaman 2023',
       image: 'https://img.cdno.my.id/thumb/w_200/h_300/aquaman-and-the-lost-kingdom-1630856281.jpg',
       link: 'https://ww4.fmovies.co/film/aquaman-and-the-lost-kingdom-1630856281/',
       link2: 'https://ww4.fmovies.co/film/aquaman-and-the-lost-kingdom-1630856281/',
-      year: 'Released year : 2024',
+      year: 'Released year : 2023',
       addtofav: 'Type : Movie '
     },
   
@@ -116,7 +116,7 @@ const Cardsdata = () => {
     },
   
     {
-      title: 'Rebel Moon: Part One - A Child of Fire',
+      title: 'Rebel Moon: Part One',
       image: 'https://img.cdno.my.id/thumb/w_200/h_300/rebel-moon-part-one-a-child-of-fire-1630856289.jpg',
       link: 'https://ww4.fmovies.co/film/rebel-moon-part-one-a-child-of-fire-1630856289/',
       link2: 'https://ww4.fmovies.co/film/rebel-moon-part-one-a-child-of-fire-1630856289/',
