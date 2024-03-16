@@ -85,7 +85,7 @@ export default function Mod(props) {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/login/signup" className="nav-link" style={navLinkStyle} activeClassName="active">
+                <NavLink to="login/singup" className="nav-link" style={navLinkStyle} activeClassName="active">
                   Log in <i className="user fa-regular fa-user"></i>
                 </NavLink>
               </li>
