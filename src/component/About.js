@@ -61,8 +61,8 @@ export default function About() {
                       </h3>
                     </div>
                     <div className="abactionbtn">
-                      <button className="btn btn-primary">Follow</button>
-                      <button className="btn btn-secondary">Message</button>
+                      <button className="btn btn-primary"style={{paddingTop:"2px"}}>Follow</button>
+                      <button className="btn btn-secondary" style={{paddingTop:"2px"}}>Message</button>
                     </div>
                   </div>
                 </div>
